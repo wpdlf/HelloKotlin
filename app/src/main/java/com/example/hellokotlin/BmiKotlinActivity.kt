@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import java.lang.Exception
 
 class BmiKotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,12 +18,16 @@ class BmiKotlinActivity : AppCompatActivity() {
         val txtResult = findViewById<TextView>(R.id.txtResult)
 
         btnBmi.setOnClickListener {
-            val height = heightField.getText().toString().toDouble()
-            val weight = weightField.getText().toString().toDouble()
+            try {
+                val height = heightField.getText().toString().toDouble()
+                val weight = weightField.getText().toString().toDouble()
 
-            val bmi = weight / Math.pow(height / 100.0, 2.0)
+                val bmi = weight / Math.pow(height / 100.0, 2.0)
 
-            txtResult.setText("Your BMI = " + bmi)
+                txtResult.setText("Your BMI = " + bmi)
+            } catch (e : Exception){
+                txtResult.setText("Input(s) missing")
+            }
         }
     }
 }
